@@ -1,4 +1,10 @@
 @import "tailwindcss";
 @plugin "daisyui" {
-  themes: light --default, dark --prefersdark, cupcake;
+  themes: all;
+}
+
+body {
+  @apply bg-base-300;
+  @apply min-h-screen;
+  @apply font-mono;
 }

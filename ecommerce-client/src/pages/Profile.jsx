@@ -1,12 +1,14 @@
 import React from 'react'
 import Navbar from '../components/Navbar'
+import Footer from '../components/footer'
 
-const Product = () => {
+const Profile = () => {
   return (
     <div>
       <Navbar/>
+      <Footer/>
     </div>
   )
 }
 
-export default Product
+export default Profile

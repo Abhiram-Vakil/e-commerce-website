@@ -2,9 +2,12 @@ import React, { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router";
 
 const Navbar = () => {
+  const numberOfCartItems = 0;
   const location = useLocation();
   const isHome = location.pathname === "/";
   const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
+  const isSeller = location.pathname === "/seller";
+  const isProfile = location.pathname === "/profile";
 
   useEffect(() => {
     document.querySelector("html").setAttribute("data-theme", theme);
@@ -20,11 +23,18 @@ const Navbar = () => {
       <div className="flex-1">
         <Link
           to={isHome ? "#" : "/"}
-          className={`btn btn-ghost ${
-            isHome ? "text-xl pointer-events-none" : " text-xl"
+          className={`btn btn-ghost text-xl font-bold ${
+            isHome || isSeller || isProfile ? " pointer-events-none" : ""
           }`}
         >
-          Navas Farm
+          Navas Farm |{" "}
+          {isProfile ? (
+            <span className="text-secondary font-semibold">Profile</span>
+          ) : (
+            <span className=" text-secondary font-semibold">
+              {isSeller ? "Seller" : "Store"}
+            </span>
+          )}
         </Link>
       </div>
       <div className="flex flex-row items-center justify-center ">
@@ -33,7 +43,7 @@ const Navbar = () => {
             <label className="swap swap-rotate ">
               {/* this hidden checkbox controls the state */}
               <input
-              onClick={toggleTheme}
+                onClick={toggleTheme}
                 type="checkbox"
                 className="theme-controller"
                 value={theme}
@@ -78,7 +88,9 @@ const Navbar = () => {
                         d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"
                       />{" "}
                     </svg>
-                    <span className="badge badge-sm indicator-item">8</span>
+                    <span className="badge badge-sm indicator-item">
+                      {numberOfCartItems}
+                    </span>
                   </div>
                 </div>
               </Link>
@@ -96,12 +108,44 @@ const Navbar = () => {
                   </div>
                 </div>
               </summary>
-              <ul className="bg-base-100 rounded-t-none p-2 ml-2">
+              <ul className="bg-base-300 rounded-t-none w-20 z-[60] flex flex-col items-center text-center p-5">
                 <li>
-                  <a>View Profile</a>
+                  <Link to="/profile" className="text-center">
+                    View Profile
+                  </Link>
                 </li>
+                <hr />
+                {isProfile ? (
+                  <>
+                    <li>
+                      <Link to="/" className="text-center">
+                        Buy products
+                      </Link>
+                    </li>
+                    <hr />
+                    <li>
+                      <Link to="/seller" className="text-center">
+                        Sell products
+                      </Link>
+                    </li>
+                  </>
+                ) : (
+                  <li>
+                    {isSeller ? (
+                      <Link to="/" className="text-center">
+                        Buy products
+                      </Link>
+                    ) : (
+                      <Link to="/seller" className="text-center">
+                        Sell products
+                      </Link>
+                    )}
+                  </li>
+                )}
+
+                <hr />
                 <li>
-                  <a>Logout</a>
+                  <a className="text-center">Logout</a>
                 </li>
               </ul>
             </details>

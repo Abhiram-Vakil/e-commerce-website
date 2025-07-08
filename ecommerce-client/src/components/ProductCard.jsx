@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router";
 
 const ProductCard = ({ name, price, image }) => {
   return (
@@ -13,7 +14,7 @@ const ProductCard = ({ name, price, image }) => {
     <h2 className="card-title">{name}</h2>
     <p>{price} Rs</p>
     <div className="card-actions">
-      <button className="btn btn-primary">Buy Now</button>
+      <Link to="/product" className="btn btn-primary">Buy Now</Link>
     </div>
   </div>
 </div>
