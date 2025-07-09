@@ -1,29 +1,29 @@
 import React, { useState } from "react";
 
-const SellerForm = ({ addProduct,products }) => {
+const SellerForm = ({ addProduct, products }) => {
   const [name, setName] = useState("");
   const [price, setPrice] = useState(0);
   const [image, setImage] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault(); // prevent page refresh
-
     const productDetail = {
+      id:  Date.now(),
       name,
       price: parseFloat(price),
       image,
     };
-    products((prev) => [...prev, productDetail])
-    addProduct(false)
+    products((prev) => [...prev, productDetail]);
+    addProduct(false);
   };
-  const handleCancel=()=>{
-    addProduct(false)
-  }
+  const handleCancel = () => {
+    addProduct(false);
+  };
 
   return (
     <div className="card bg-base-100 p-5 self-center justify-self-center absolute w-11/12 xl:w-6/12">
       <form
-         onSubmit={handleSubmit}
+        onSubmit={handleSubmit}
         className="flex flex-col gap-10 items-center justify-center"
       >
         <h1>Product Details</h1>
@@ -61,12 +61,13 @@ const SellerForm = ({ addProduct,products }) => {
           </div>
         </div>
         <div className="flex flex-row gap-2">
-            <button className="btn btn-primary" type="submit">
-          Add
-        </button>
-        <button className="btn btn-secondary"  onClick={handleCancel} >Cancel</button>
+          <button className="btn btn-primary" type="submit">
+            Add
+          </button>
+          <button className="btn btn-secondary" onClick={handleCancel}>
+            Cancel
+          </button>
         </div>
-        
       </form>
     </div>
   );

@@ -1,7 +1,7 @@
 import React from 'react'
 import { HiOutlineTrash } from 'react-icons/hi'
 
-const SellerList = ({ name, price, image}) => {
+const SellerList = ({ id,name, price, image, onDelete}) => {
   return (
      <li className="list-row">
           <div>
@@ -14,7 +14,7 @@ const SellerList = ({ name, price, image}) => {
             </div>
           </div>
           <div className="flex flex-row items-center justify-center gap-3">
-            <button className="btn btn-square btn-ghost size-10" ><HiOutlineTrash className="size-5" /></button>
+            <button className="btn btn-square btn-ghost size-10" onClick={()=> onDelete(id)}><HiOutlineTrash className="size-5" /></button>
           </div>
         </li>
   )

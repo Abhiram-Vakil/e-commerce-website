@@ -9,7 +9,9 @@ const Seller = () => {
   const [addProduct, setAddProduct] = useState(false);
   const [products, setProducts] = useState([]);
   console.log(products);
-
+  const handleDelete = (id) => {
+    setProducts((products) => products.filter((product) => product.id !== id));
+  };
   const addHandler = () => {
     setAddProduct(true);
   };
@@ -19,14 +21,16 @@ const Seller = () => {
       <div className="p-10">
         <ul className="list bg-base-200 rounded-box shadow-md ">
           <li className="p-4 pb-2 text-xs opacity-60 tracking-wide">
-            {products.length!==0?"your Products":"Add your first item"}
+            {products.length !== 0 ? "your Products" : "Add your first item"}
           </li>
           {products.map((product) => {
             return (
               <SellerList
+                id={product.id}
                 name={product.name}
                 price={product.price}
                 image={egg}
+                onDelete={handleDelete}
               />
             );
           })}
