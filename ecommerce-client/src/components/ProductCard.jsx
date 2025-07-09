@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router";
+import { HiShoppingCart } from "react-icons/hi"
 
 const ProductCard = ({ name, price, image }) => {
   return (
@@ -15,6 +16,7 @@ const ProductCard = ({ name, price, image }) => {
     <p>{price} Rs</p>
     <div className="card-actions">
       <Link to="/product" className="btn btn-primary">Buy Now</Link>
+      <button className="btn btn-secondary"><HiShoppingCart/></button>
     </div>
   </div>
 </div>

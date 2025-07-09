@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router";
+import { useCart } from "../contexts/CartContext";
 
 const Navbar = () => {
-  const numberOfCartItems = 0;
+  const {productCount} = useCart();
+  
   const location = useLocation();
   const isHome = location.pathname === "/";
   const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
@@ -89,7 +91,7 @@ const Navbar = () => {
                       />{" "}
                     </svg>
                     <span className="badge badge-sm indicator-item">
-                      {numberOfCartItems}
+                      {productCount}
                     </span>
                   </div>
                 </div>
