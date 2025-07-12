@@ -16,11 +16,18 @@ export const registerUer = async (req, res) => {
     });
     await user.save();
     const token = generateToken(user._id);
-    res.status(200).json({ message: "Sign up Successful", user, token });
+
+    res.cookie("token", token, {
+      httpOnly: true,
+      secure: true, // only over HTTPS
+      sameSite: "Strict", // protects from CSRF
+      maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
+    });
+
+    res.status(200).json({ message: "Sign up Successful", user });
   } catch (error) {
-    res.status(500).json({ message: "Server error",error: error.message });
+    res.status(500).json({ message: "Server error", error: error.message });
     console.error(error);
-    
   }
 };
 
@@ -34,8 +41,24 @@ export const loginUser = async (req, res) => {
     if (!isMatch)
       return res.status(400).json({ message: "Incorrect password" });
     const token = generateToken(userExists._id);
-    res.status(200).json({ message: "Login Successful",token });
+    res.cookie("token", token, {
+      httpOnly: true,
+      secure: true, // only over HTTPS
+      sameSite: "Strict", // protects from CSRF
+      maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
+    });
+    res.status(200).json({ message: "Login Successful", token });
   } catch (error) {
     res.status(500).json({ message: "Server error" });
   }
+};
+
+export const logoutUser = (req, res) => {
+  res.clearCookie("token", {
+    httpOnly: true,
+    secure: true,
+    sameSite: "Strict",
+  });
+
+  res.status(200).json({ message: "Logged out successfully" });
 };
