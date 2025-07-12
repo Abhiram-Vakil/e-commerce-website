@@ -6,7 +6,7 @@ const SignUp = () => {
        <div className="hero bg-base-200 min-h-screen">
   <div className="hero-content flex-col lg:flex-row-reverse">
     <div className="text-center lg:text-left">
-      <h1 className="text-5xl font-bold">Sign Up now!</h1>
+      <h1 className="text-5xl font-bold">Sign Up Now!</h1>
       <p className="py-6">
        already have an account <Link to={"/login"} className='text-secondary'>Login</Link>
       </p>
