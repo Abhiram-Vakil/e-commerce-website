@@ -8,7 +8,6 @@ import Seller from "./pages/Seller";
 import Profile from "./pages/Profile";
 import Login from "./pages/Login";
 import SignUp from "./pages/SignUp";
-import Test from "./pages/test";
 
 const App = () => {
   return (
@@ -22,8 +21,6 @@ const App = () => {
           <Route path="/profile" element={<Profile />}></Route>
           <Route path="/login" element={<Login />}></Route>
           <Route path="/signup" element={<SignUp />}></Route>
-          <Route path="/test" element={<Test />}></Route>
-
           <Route path="*" element={<PageNotFound />}></Route>
         </Routes>
       </BrowserRouter>
