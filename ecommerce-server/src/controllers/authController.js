@@ -2,7 +2,7 @@ import bcrypt from "bcrypt";
 import User from "../models/User.js";
 import generateToken from "../utils/generateToken.js";
 
-export const registerUer = async (req, res) => {
+export const registerUser = async (req, res) => {
   const { name, password, email } = req.body;
   try {
     const userExists = await User.findOne({ email });
@@ -47,7 +47,7 @@ export const loginUser = async (req, res) => {
       sameSite: "Strict", // protects from CSRF
       maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
     });
-    res.status(200).json({ message: "Login Successful", token });
+    res.status(200).json({ message: "Login Successful" });
   } catch (error) {
     res.status(500).json({ message: "Server error" });
   }
