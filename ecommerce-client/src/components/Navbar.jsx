@@ -1,16 +1,22 @@
 import React, { useEffect, useState } from "react";
-import { Link, useLocation } from "react-router";
+import { Link, useLocation, useNavigate } from "react-router";
 import { useCart } from "../contexts/CartContext";
+import axios from "axios";
 
 const Navbar = () => {
-  const {productCount} = useCart();
-  
+  const { productCount } = useCart();
+  const navigate = useNavigate();
   const location = useLocation();
   const isHome = location.pathname === "/";
   const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
   const isSeller = location.pathname === "/seller";
   const isProfile = location.pathname === "/profile";
 
+  const handleLogout = () => {
+    const res = axios.get("http://localhost:5001/api/auth/logout");
+    navigate("/login")
+    console.log(res);
+  };
   useEffect(() => {
     document.querySelector("html").setAttribute("data-theme", theme);
     localStorage.setItem("theme", theme);
@@ -147,7 +153,9 @@ const Navbar = () => {
 
                 <hr />
                 <li>
-                  <a className="text-center">Logout</a>
+                  <a className="text-center" onClick={handleLogout}>
+                    Logout
+                  </a>
                 </li>
               </ul>
             </details>

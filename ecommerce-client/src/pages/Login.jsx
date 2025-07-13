@@ -18,7 +18,7 @@ const Login = () => {
         password,
       });
     
-      console.log(res.data);
+      console.log(res);
       navigate("/");
     } catch (error) {
       console.error("Login failed");
