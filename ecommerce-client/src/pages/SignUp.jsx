@@ -1,6 +1,8 @@
 import React from 'react'
 import { Link } from 'react-router'
 const SignUp = () => {
+  const { user } = useSelector((state) => state.auth);
+  if (user) return <Navigate to="/" />;
   return (
     <div>
        <div className="hero bg-base-200 min-h-screen">
