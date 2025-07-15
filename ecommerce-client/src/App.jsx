@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Route, Routes, BrowserRouter } from "react-router";
 import Home from "./pages/Home";
 import Product from "./pages/Product";
@@ -9,8 +9,31 @@ import Profile from "./pages/Profile";
 import Login from "./pages/Login";
 import SignUp from "./pages/SignUp";
 import PrivateRoute from "./components/PrivateRoute";
+import axios from "axios";
+import { useDispatch, useSelector } from "react-redux";
+import { login, logout, setLoading } from "./slices/authSlice";
 
 const App = () => {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    const fetchUser = async () => {
+      try {
+        const res = await axios.get("http://localhost:5001/api/auth/me", {
+          withCredentials: true,
+        });
+        dispatch(login(res.data.user));
+        dispatch(setLoading(false));
+      } catch (err) {
+        dispatch(logout());
+        dispatch(setLoading(false));
+        console.log("User not logged in");
+      }
+    };
+    fetchUser();
+  }, []);
+  const { loading } = useSelector((state) => state.auth);
+  if (loading) return <div>Loading...</div>;
+
   return (
     <div>
       <BrowserRouter>

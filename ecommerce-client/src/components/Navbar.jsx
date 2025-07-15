@@ -2,19 +2,26 @@ import React, { useEffect, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router";
 import { useCart } from "../contexts/CartContext";
 import axios from "axios";
+import { useDispatch, useSelector } from "react-redux";
+import { logout } from "../slices/authSlice";
 
 const Navbar = () => {
+  const dispatch = useDispatch();
+  const { user } = useSelector((state) => state.auth);
+  const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
   const { productCount } = useCart();
   const navigate = useNavigate();
   const location = useLocation();
   const isHome = location.pathname === "/";
-  const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
   const isSeller = location.pathname === "/seller";
   const isProfile = location.pathname === "/profile";
 
   const handleLogout = () => {
-    const res = axios.get("http://localhost:5001/api/auth/logout");
-    navigate("/login")
+    const res = axios.get("http://localhost:5001/api/auth/logout", {
+      withCredentials: true,
+    });
+    dispatch(logout());
+    navigate("/login");
     console.log(res);
   };
   useEffect(() => {
