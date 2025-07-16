@@ -5,13 +5,13 @@ import {
   editProduct,
   readAllProducts,
   readProduct,
-} from "../controllers/productController";
+} from "../controllers/productController.js";
 
 const router = express.Router();
 
 router.post("/product", addProduct);
 router.delete("/product/:id", deleteProduct);
-router.post("/product/:id", editProduct);
+router.put("/product/:id", editProduct);
 router.get("/product/:id", readProduct);
 router.get("/product", readAllProducts);
 
