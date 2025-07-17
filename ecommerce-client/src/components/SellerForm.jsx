@@ -4,14 +4,18 @@ const SellerForm = ({ addProduct, products }) => {
   const [name, setName] = useState("");
   const [price, setPrice] = useState(0);
   const [image, setImage] = useState("");
+  const [description,setDescription]=useState("")
+  const [countInStock,setCountInStock]=useState(1)
 
   const handleSubmit = (e) => {
     e.preventDefault(); // prevent page refresh
     const productDetail = {
       id:  Date.now(),
       name,
+      description,
       price: parseFloat(price),
       image,
+      countInStock
     };
     products((prev) => [...prev, productDetail]);
     addProduct(false);
@@ -39,6 +43,17 @@ const SellerForm = ({ addProduct, products }) => {
               onChange={(e) => setName(e.target.value)}
             />
           </div>
+          <div className="grid grid-cols-2 ">
+            <label className="label">description</label>
+            <input
+              type="text"
+              required
+              className="input"
+              placeholder="Add description"
+              value={description}
+              onChange={(e) => setName(e.target.value)}
+            />
+          </div>
           <div className="grid grid-cols-2">
             <label className="label">Price</label>
             <input
@@ -56,6 +71,7 @@ const SellerForm = ({ addProduct, products }) => {
               type="text"
               className="input"
               value={image}
+              placeholder="Image Link"
               onChange={(e) => setImage(e.target.value)}
             />
           </div>
