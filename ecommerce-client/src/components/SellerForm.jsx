@@ -51,7 +51,7 @@ const SellerForm = ({ addProduct, products }) => {
               className="input"
               placeholder="Add description"
               value={description}
-              onChange={(e) => setName(e.target.value)}
+              onChange={(e) => setDescription(e.target.value)}
             />
           </div>
           <div className="grid grid-cols-2">
@@ -63,6 +63,17 @@ const SellerForm = ({ addProduct, products }) => {
               placeholder="Product Price"
               value={price}
               onChange={(e) => setPrice(e.target.value)}
+            ></input>
+          </div>
+          <div className="grid grid-cols-2">
+            <label className="label">Count</label>
+            <input
+              type="text"
+              required
+              className="input"
+              placeholder="Quantity"
+              value={countInStock}
+              onChange={(e) => setCountInStock(e.target.value)}
             ></input>
           </div>
           <div className="grid grid-cols-2">
