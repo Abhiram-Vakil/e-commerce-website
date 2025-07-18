@@ -3,6 +3,7 @@ import Navbar from "../components/Navbar.jsx";
 import egg from "../assets/egg.png";
 import ProductCard from "../components/ProductCard.jsx";
 import Footer from "../components/footer.jsx";
+import Loading from "../components/Loading.jsx";
 
 const Home = () => {
   const products = [

@@ -12,6 +12,7 @@ import PrivateRoute from "./components/PrivateRoute";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { login, logout, setLoading } from "./slices/authSlice";
+import Loading from "./components/Loading";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -32,7 +33,7 @@ const App = () => {
     fetchUser();
   }, []);
   const { loading } = useSelector((state) => state.auth);
-  if (loading) return <div>Loading...</div>;
+  if (loading) return <Loading/>;
 
   return (
     <div>
